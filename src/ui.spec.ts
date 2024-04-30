@@ -1,15 +1,17 @@
-import { vi } from "vitest"
-import {partida } from "./modelo";
-import {ganarOPerder, gestionarPartida } from "./ui"
 
-describe(gestionarPartida, () => {
-    it("Deberia poner ¡ Lo has clavado! ¡Enhorabuena! en el HTML en caso de que la puntuacion sea 7,5", () => {
+import {estadoPartida, partida } from "./modelo";
+import { condicionGanarOPerder } from "./motor";
+import { ganarOPerder } from "./ui";
+
+
+describe(ganarOPerder(condicionGanarOPerder()), () => {
+    it("Deberia devolver Has_Ganado en caso de que la puntuacion sea 7,5", () => {
     // Arrange
-    vi.spyOn(partida, "puntuacion" ,"get").mockReturnValue(7.5)
-    const resultadoEsperado = "¡ Lo has clavado! ¡Enhorabuena!"
+    partida.puntuacion = 7.5
+    const resultadoEsperado : estadoPartida = "Has_Ganado" 
     // Act
-    const resultado = ganarOPerder()
+    const resultado : estadoPartida = condicionGanarOPerder()
     // Assert
-    expect(resultado).toBe(resultadoEsperado);
+    expect(resultado).toBe(resultadoEsperado)
     })
 })

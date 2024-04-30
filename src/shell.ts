@@ -1,15 +1,12 @@
 import {
-    dameCartaBoton,
-    plantarseBoton,
-    nuevaPartidaBoton,
-    supuestoBoton,
-  } from "./modelo";
-  
-  import {
     ejecutarEnBotonDameCarta,
     ejecutarEnBotonPlantarse,
     ejecutarEnBotonNuevaPartida,
     ejectutarEnBotonSupuesto,
+    dameCartaBoton,
+    plantarseBoton,
+    supuestoBoton,
+    nuevaPartidaBoton,
   } from "./ui";
 
   if (

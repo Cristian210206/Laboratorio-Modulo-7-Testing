@@ -1,17 +1,8 @@
 import {
     partida,
-    dameCartaBoton,
-    plantarseBoton,
-    supuestoBoton,
+    estadoPartida,
   } from "./modelo";
 
-if (
-    supuestoBoton !== null &&
-    supuestoBoton !== undefined &&
-    supuestoBoton instanceof HTMLButtonElement
-    ) {
-    supuestoBoton.disabled = true;
-}
 
 export function dameNumeroRandom() {
     return Math.floor(Math.random() * (9 + 1) + 1);
@@ -22,6 +13,17 @@ export function dameNumeroRandom() {
       return numeroRandom + 2;
     } else {
       return numeroRandom;
+    }
+  }
+
+  export function condicionGanarOPerder() :estadoPartida {
+    if(partida.puntuacion === 7.5) {
+      return "Has_Ganado"
+    } 
+    if(partida.puntuacion > 7.5) {
+      return "Has_Perdido"
+    } else {
+      return "Aun_No_Has_Acabado"
     }
   }
 
@@ -71,35 +73,6 @@ export function dameNumeroRandom() {
   }
   
 
-  export function desactivarBotonesFinDePartida() {
-    if (
-      partida.puntuacion >= 7.5 &&
-      dameCartaBoton !== null &&
-      dameCartaBoton !== undefined &&
-      dameCartaBoton instanceof HTMLButtonElement &&
-      plantarseBoton !== null &&
-      plantarseBoton !== undefined &&
-      plantarseBoton instanceof HTMLButtonElement
-    ) {
-      dameCartaBoton.disabled = true;
-      plantarseBoton.disabled = true;
-    }
-  }
-
-  export function desactivarBotones() {
-    if (
-      dameCartaBoton !== null &&
-      dameCartaBoton !== undefined &&
-      dameCartaBoton instanceof HTMLButtonElement &&
-      plantarseBoton !== null &&
-      plantarseBoton !== undefined &&
-      plantarseBoton instanceof HTMLButtonElement
-    ) {
-      dameCartaBoton.disabled = true;
-      plantarseBoton.disabled = true;
-    }
-  }
-
   export function mensajePlantarse(puntuacion: number) {
     if (puntuacion < 4) {
       return "Has sido muy conservador";
@@ -120,16 +93,6 @@ export function dameNumeroRandom() {
     partida.puntuacion = 0;
   }
 
-  export function desactivarBotonSupuesto() {
-    if (
-      supuestoBoton !== null &&
-      supuestoBoton !== undefined &&
-      supuestoBoton instanceof HTMLButtonElement
-    ) {
-      supuestoBoton.disabled = true;
-    }
-  }
-  
   export function mensajeSupuesto(puntuacion: number) {
     if (puntuacion < 7.5) {
       return "No habrias ganado de todas formas si hubieras continuado";

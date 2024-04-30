@@ -1,11 +1,6 @@
 import {
     partida,
-    puntuacionHtml,
-    carta,
-    mostrarMensajeHTML,
-    dameCartaBoton,
-    plantarseBoton,
-    supuestoBoton,
+    estadoPartida,
   } from "./modelo";
 
 import {
@@ -13,13 +8,66 @@ import {
     dameNumeroCarta,
     dameURLCarta,
     damePuntuacion,
-    desactivarBotones,
-    mensajePlantarse,
+    condicionGanarOPerder,
     reiniciarPuntos,
-    desactivarBotonSupuesto,
+    mensajePlantarse,
     mensajeSupuesto,
-    desactivarBotonesFinDePartida,
   } from "./motor";
+
+export const puntuacionHtml = document.getElementById("puntuacion");
+export const carta = document.getElementById("carta");
+export const dameCartaBoton = document.getElementById("dameCarta");
+export const plantarseBoton = document.getElementById("mePlanto");
+export const nuevaPartidaBoton = document.getElementById("nuevaPartida");
+export const mostrarMensajeHTML = document.getElementById("mostrarMensaje");
+export const supuestoBoton = document.getElementById("supuesto")
+
+if (
+  supuestoBoton !== null &&
+  supuestoBoton !== undefined &&
+  supuestoBoton instanceof HTMLButtonElement
+  ) {
+  supuestoBoton.disabled = true;
+}
+
+function desactivarBotonesFinDePartida() {
+  if (
+    partida.puntuacion >= 7.5 &&
+    dameCartaBoton !== null &&
+    dameCartaBoton !== undefined &&
+    dameCartaBoton instanceof HTMLButtonElement &&
+    plantarseBoton !== null &&
+    plantarseBoton !== undefined &&
+    plantarseBoton instanceof HTMLButtonElement
+  ) {
+    dameCartaBoton.disabled = true;
+    plantarseBoton.disabled = true;
+  }
+}
+
+export function desactivarBotones() {
+  if (
+    dameCartaBoton !== null &&
+    dameCartaBoton !== undefined &&
+    dameCartaBoton instanceof HTMLButtonElement &&
+    plantarseBoton !== null &&
+    plantarseBoton !== undefined &&
+    plantarseBoton instanceof HTMLButtonElement
+  ) {
+    dameCartaBoton.disabled = true;
+    plantarseBoton.disabled = true;
+  }
+}
+
+function desactivarBotonSupuesto() {
+  if (
+    supuestoBoton !== null &&
+    supuestoBoton !== undefined &&
+    supuestoBoton instanceof HTMLButtonElement
+  ) {
+    supuestoBoton.disabled = true;
+  }
+}
 
    function cambioCarta(URLCarta: string) {
     if (
@@ -40,20 +88,28 @@ import {
       puntuacionHtml.innerText = `Tienes ${partida.puntuacion} puntos`;
   }
 
-   export function ganarOPerder() {
-    if(partida.puntuacion === 7.5) {
+   export function ganarOPerder(condicionGanarOPerder: estadoPartida) {
+    switch(condicionGanarOPerder) {
+      case "Has_Ganado" 
+      :
       return "¡ Lo has clavado! ¡Enhorabuena!"
-    } else {
-    return "Game Over"
+      break
+      case "Has_Perdido"
+      :
+      return "Game Over"
+      break
+      default
+      :
+      return ""
     }
-  }
+   }
 
   function mostrarMensajeGanarOPerder() {
     if (
       mostrarMensajeHTML !== null &&
       mostrarMensajeHTML !== undefined
     ) {
-      mostrarMensajeHTML.innerText = ganarOPerder();
+      mostrarMensajeHTML.innerText = ganarOPerder(condicionGanarOPerder());
     }
   }
 
@@ -137,13 +193,13 @@ import {
 
   export function gestionarPartida() {
     if (partida.puntuacion === 7.5) {
-      ganarOPerder()
+      ganarOPerder(condicionGanarOPerder())
       mostrarMensajeGanarOPerder()
       desactivarBotonesFinDePartida()
     }
 
     if (partida.puntuacion > 7.5) {
-      ganarOPerder()
+      ganarOPerder(condicionGanarOPerder())
       mostrarMensajeGanarOPerder()
       desactivarBotonesFinDePartida()
     }
