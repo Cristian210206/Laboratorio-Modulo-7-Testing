@@ -87,8 +87,6 @@ export function dameNumeroRandom() {
     }
   }
 
-
-
   export function reiniciarPuntos() {
     partida.puntuacion = 0;
   }
