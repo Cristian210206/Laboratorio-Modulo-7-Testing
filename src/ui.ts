@@ -182,7 +182,7 @@ function desactivarBotonSupuesto() {
     }
   }
 
-   function dameCarta() {
+   export function dameCarta() {
     const numeroRandom = dameNumeroRandom();
     const numeroCarta = dameNumeroCarta(numeroRandom);
     const URLCarta = dameURLCarta(numeroCarta);
