@@ -20,7 +20,6 @@ describe("comprobarVictoria", () => {
         vi.spyOn(motor, "condicionGanarOPerder").mockReturnValue("Has_Ganado")
         const resultadoEsperado = "¡ Lo has clavado! ¡Enhorabuena!"
         // Act
-        motor.condicionGanarOPerder()
         const resultado : string = ganarOPerder(motor.condicionGanarOPerder())
         // Assert
         expect(resultado).toBe(resultadoEsperado)
